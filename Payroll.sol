@@ -41,98 +41,25 @@ contract Payroll {
         lastPaymentTime = block.timestamp; // Set the initial payment time to now
     }
 
-    // TODO: Implement a function to add a new employee with salary and check if the employee already exists
-    function addEmployee(address worker, uint256 salary) external onlyCompanyOwner returns (bool) {
-        require(salary > 0, "Salary must be greater than zero!");
-        require(!isEmployee[worker], "Employee already exists!");
+    // TODO: Add functionality to add a new employee with a salary and check if the employee already exists
 
-        totalEmployees++;
-        totalSalary += salary;
-        isEmployee[worker] = true;
+    // TODO: Add functionality to deactivate an employee (e.g., termination or leave)
 
-        // Mark employee as active and record their salary and ID
-        employees.push(Employee(totalEmployees, worker, salary, block.timestamp, true));
+    // TODO: Add functionality to check if the payment interval has elapsed since the last payment
 
-        emit EmployeeAdded(totalEmployees, worker, salary);
-        return true;
-    }
+    // TODO: Add functionality to process batch payments securely and prevent reentrancy attacks
 
-    // TODO: Implement a function to deactivate an employee (e.g., termination or leave)
-    function deactivateEmployee(address worker) external onlyCompanyOwner returns (bool) {
-        require(isEmployee[worker], "Employee does not exist!");
+    // TODO: Add functionality to allow the company owner to fund the company balance and track it
 
-        uint256 index = getEmployeeIndex(worker);
-        employees[index].isActive = false;
-        isEmployee[worker] = false;
-
-        return true;
-    }
-
-    // TODO: Implement a function to check if the payment interval has elapsed since the last payment and only proceed if the interval is met
-    function checkPaymentInterval() internal returns (bool) {
-        require(block.timestamp >= lastPaymentTime + paymentInterval, "Payment interval not yet reached.");
-        return true;
-    }
-
-    // TODO: Implement the batch payment process with additional security for preventing reentrancy attacks
-    function payEmployees() external payable onlyCompanyOwner returns (bool) {
-        require(msg.value >= totalSalary, "Insufficient funds to pay employees.");
-        require(totalSalary <= companyBal, "Company balance too low.");
-        require(checkPaymentInterval(), "Payment interval has not been reached.");
-
-        // Prevent reentrancy attack: record current state and then pay
-        uint256 totalAmountToPay = totalSalary;
-        lastPaymentTime = block.timestamp; // Update last payment time
-        companyBal -= msg.value;
-
-        // TODO: Write secure logic for paying each employee and logging payments
-        for (uint256 i = 0; i < employees.length; i++) {
-            if (employees[i].isActive) {
-                payTo(employees[i].worker, employees[i].salary);
-                lastPaid[employees[i].worker] = block.timestamp; // Record the last payment time
-            }
-        }
-
-        emit Paid(totalEmployees, companyAcc, totalAmountToPay, block.timestamp);
-        return true;
-    }
-
-    // TODO: Implement the function to allow the company owner to fund the company balance and keep track of it
-    function fundCompanyBalance() external payable onlyCompanyOwner returns (bool) {
-        companyBal += msg.value;
-        emit PaymentScheduled(lastPaymentTime + paymentInterval);
-        return true;
-    }
-
-    // TODO: Implement the function to allow the company owner to change the payment interval dynamically
-    function updatePaymentInterval(uint256 newInterval) external onlyCompanyOwner {
-        require(newInterval > 0, "Interval must be greater than zero.");
-        paymentInterval = newInterval;
-    }
+    // TODO: Add functionality to allow the company owner to update the payment interval dynamically
 
     function getEmployees() external view returns (Employee[] memory) {
         return employees;
     }
 
-    // TODO: Implement the internal function to safely send money to an employee, ensuring no reentrancy attack
-    function payTo(address to, uint256 amount) internal returns (bool) {
-        (bool success, ) = payable(to).call{value: amount}("");
-        require(success, "Payment failed.");
-        return true;
-    }
+    // TODO: Add an internal function to securely send money to an employee, preventing reentrancy attacks
 
-    // Helper function to get employee index by address
-    function getEmployeeIndex(address worker) internal view returns (uint256) {
-        for (uint256 i = 0; i < employees.length; i++) {
-            if (employees[i].worker == worker) {
-                return i;
-            }
-        }
-        revert("Employee not found.");
-    }
+    // TODO: Add a helper function to get an employee's index by their address
 
-    // TODO: Add additional helper function to manage contract termination (optional)
-    // function terminateContract() external onlyCompanyOwner {
-    //     selfdestruct(payable(companyAcc));
-    // }
+    // TODO: Optionally, add a function to terminate the contract and transfer remaining funds to the company owner
 }
