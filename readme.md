@@ -38,5 +38,5 @@ The Payroll smart contract is a Solidity-based implementation that enables effic
    1. The Playground Challenge has a total of **20 marks** distributed as follows:
         
         * Completing the TODOs carries **15 marks**.
-        * submission of PDF with snapshots of test case outputs carries **5 marks** (atleast 1 per team). 
+        * Submission of PDF with snapshots of test case outputs carries **5 marks** (atleast 1 per team). 
 
