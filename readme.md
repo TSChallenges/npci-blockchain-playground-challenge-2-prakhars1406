@@ -30,7 +30,7 @@ The Payroll smart contract is a Solidity-based implementation that enables effic
 ## Submissions:
 
    1. Complete all TODOs in the `Payroll.sol` file and commit the changes.
-   2. Interact with the contract & impliment test cases in Remix IDE, capture snapshots of the results, and paste them into a document. Convert the document to PDF format.
+   2. Interact with the contract & implement test cases in Remix IDE, capture snapshots of the results, and paste them into a document. Convert the document to PDF format.
    3. Upload the snapshots PDF by navigating to your Github Playground challenge repo (i.e. top of this page), select **Add file → Upload files**.
 
 ## Grading:
@@ -38,5 +38,5 @@ The Payroll smart contract is a Solidity-based implementation that enables effic
    1. The Playground Challenge has a total of **20 marks** distributed as follows:
         
         * Completing the TODOs carries **15 marks**.
-        * testing snapshots with results carries **5 marks**. 
+        * submission of PDF with snapshots of test case outputs carries **5 marks** (atleast 1 per team). 
 
