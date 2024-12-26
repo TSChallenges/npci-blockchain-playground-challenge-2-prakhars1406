@@ -27,3 +27,9 @@ The Payroll smart contract is a Solidity-based implementation that enables effic
 1. Attempt to add the same employee twice to confirm error handling.
 2. Verify that payments fail when the contract balance is insufficient.
 
+## Submissions:
+
+   1. Complete all TODOs in the `Payroll.sol` file and commit the changes.
+   2. Implement Features & test cases in Remix IDE, capture snapshots of the results, and paste them into a document. Convert the document to PDF format.
+   3. Upload the snapshots PDF by navigating to your Playground challenge link, selecting **Add file → Upload files**. 
+
