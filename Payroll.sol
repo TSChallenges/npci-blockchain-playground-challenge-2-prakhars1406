@@ -102,7 +102,6 @@ contract Payroll {
     function fundCompany() external  payable {
         require(msg.value > 0, "fund amount is less than or equal to 0");
         companyBal = companyBal + msg.value;
-        payable(address(this)).transfer(msg.value);
     }
 
     // TODO: Add functionality to allow the company owner to update the payment interval dynamically
