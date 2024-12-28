@@ -78,12 +78,16 @@ contract Payroll {
 
     }
 
-    // function deactivateEmployee(address worker) public onlyCompanyOwner {
-
-    //     require(isEmployee[worker], "Employee with address does not exists");
-    //     Employees[]
-
-    // }
+    function deactivateEmployee(address worker) public onlyCompanyOwner {
+        require(isEmployee[worker], "Employee with address does not exists");
+        
+        for (uint256 i = 0; i < employees.length; i++) {
+            if (employees[i].worker == worker) {
+                employees[i].isActive = false;
+                totalSalary = totalSalary - employees[i].salary;
+            }
+        }
+    }
 
     // function getEmployeeIndex(address ) view internal returns(uint256){
         
@@ -99,7 +103,7 @@ contract Payroll {
 
     // TODO: Add functionality to allow the company owner to fund the company balance and track it
 
-    function fundCompany() external  payable {
+    function fundCompany() external payable {
         require(msg.value > 0, "fund amount is less than or equal to 0");
         companyBal = companyBal + msg.value;
     }
